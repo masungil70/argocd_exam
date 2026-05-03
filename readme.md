@@ -686,15 +686,7 @@ print("version 2")
 
 ---
 
-## 2) push
-
-```bash id="z8x1lq"
-git add .
-git commit -m "update"
-git push
-```
-
----
+## 2) git hub에 push 한다
 
 ## 3) 자동 발생
 
@@ -704,68 +696,35 @@ ArgoCD → sync
 Pod → 자동 재배포
 ```
 
----
+##  argocd 프로젝트의 상태를 확인
 
-# 10. 운영에서 중요한 포인트
+```bash
+app get echo-hostname
 
-## ❗ 1. image tag 전략
+결과 :
 
-| 방식               | 추천    |
-| ---------------- | ----- |
-| latest           | ❌ 위험  |
-| git SHA          | ⭐⭐⭐⭐⭐ |
-| semantic version | ⭐⭐⭐⭐  |
+Name:               argocd/echo-hostname
+Project:            default
+Server:             https://kubernetes.default.svc
+Namespace:          default
+URL:                https://192.168.80.165:30118/applications/echo-hostname
+Source:
+- Repo:             https://github.com/masungil70/argocd_exam
+  Target:           main
+  Path:             app_exam-k8s/k8s
+SyncWindow:         Sync Allowed
+Sync Policy:        Automated
+Sync Status:        Synced to main (c796417)
+Health Status:      Healthy
 
-👉 추천:
+GROUP  KIND        NAMESPACE  NAME                 STATUS  HEALTH   HOOK  MESSAGE
+       Service     default    echo-hostname-svc    Synced  Healthy        service/echo-hostname-svc created
+apps   Deployment  default    hostname-deployment  Synced  Healthy        deployment.apps/hostname-deployment created
 
-```text id="k9d2pq"
-image: repo/app:github_sha
 ```
 
----
+## 수동으로 동기화 하기
 
-## ❗ 2. security (실무)
-
-* Docker Hub token 사용
-* GitHub Secrets 필수
-* ArgoCD read-only 권한
-
----
-
-## ❗ 3. 구조 최적화
-
-추천 구조:
-
-```text id="c8m1xq"
-repo-app
-repo-gitops
-repo-ci (optional)
 ```
-
----
-
-# 11. 한 줄 핵심 정리
-
-> GitHub Actions가 CI를 하고, ArgoCD가 CD를 담당하는 구조가 “정석 DevOps”이다.
-
----
-
-# 12. 다음 단계 (진짜 실무 레벨)
-
-원하면 바로 이어서 가능:
-
-### 🔥 Blue/Green 배포 (무중단)
-
-### 🔥 Canary 배포 (Argo Rollouts)
-
-### 🔥 Helm 기반 구조 전환
-
-### 🔥 EKS / On-prem hybrid GitOps
-
-### 🔥 Prometheus + Grafana 모니터링
-
----
-
-원하면 다음은 이거 해줄게:
-
-👉 **“실제 기업에서 쓰는 GitOps + ArgoCD + CI/CD 완전 운영 구조”**
+argocd app sync echo-hostname --prune
+```
