@@ -577,7 +577,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t $IMAGE_NAME:${{ github.sha }} .
+        docker build -t $IMAGE_NAME:${{ github.sha }} echo-hostname/.
 
     - name: Push Docker image
       run: |
@@ -620,8 +620,7 @@ DOCKER_PASSWORD = your password
 
         git add .
         git commit -m "update image tag ${{ github.sha }}"
-        git push
-```
+        git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/masungil70/argocd_exam.git```
 
 ---
 
