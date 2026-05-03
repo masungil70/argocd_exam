@@ -631,11 +631,31 @@ DOCKER_PASSWORD = your password
 
 ArgoCD 설정:
 
+파일 : argocd/echo-hostname.yaml
+
 ```yaml id="7n2p1q"
-syncPolicy:
-  automated:
-    prune: true
-    selfHeal: true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: echo-hostname
+  namespace: argocd
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/masungil70/app_exam-k8s.git
+    targetRevision: main
+    path: k8s   # 여기가 중요 (deployment 위치)
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
 ```
 
 👉 이게 있어야 자동 배포됨
