@@ -17,7 +17,7 @@ spec:
       - name: dockerhub-secret #docker hub 관련 정보 추가
       containers:
       - name: my-webserver
-        image: masungil/echo-hostname:c7964175b93e00fd83f96d97b28548e75c47cde0
+        image: masungil/echo-hostname:5735b94cb87b2e88cb9afd09db9573e415a65543
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
