@@ -553,6 +553,9 @@ masungil/echo-hostname
 ```yaml id="c9v2a1"
 name: CI-CD Pipeline
 
+permissions:
+  contents: write
+
 on:
   push:
     branches:
