@@ -478,17 +478,17 @@ Kubernetes 자동 배포
 
 ### ✔ 1) ArgoCD의 폴더 구조는 아래와 같이 구성 해야 됩니다
 
-app_exam/
-├── echo-hostname/   ← (프로그램 소스 repo)  
+argocd_exam
+├── echo-hostname   ← (프로그램 소스 repo)  
 │    ├── Dockerfile
 │    ├── build.sh
 │    ├── main.py
 │    └── requirements.txt
-└──  app_exam-k8s/   ← (ArgoCD가 보는 repo)
-     ├── k8s/
+└──  app_exam-k8s   ← (ArgoCD가 보는 repo)
+     ├── k8s
      │   ├── deployment.yaml
      │   └── svc.yaml
-     └── argocd/
+     └── argocd
         └── echo-hostname.yaml  
 
 ### ✔ 2) Manifest Repo (ArgoCD가 보는 GitOps repo)
@@ -646,7 +646,7 @@ spec:
   source:
     repoURL: https://github.com/masungil70/app_exam-k8s.git
     targetRevision: main
-    path: k8s   # 여기가 중요 (deployment 위치)
+    path: app_exam-k8s/k8s   # 여기가 중요 (deployment 위치)
 
   destination:
     server: https://kubernetes.default.svc
