@@ -13,8 +13,8 @@ spec:
       labels:
         app: webserver
     spec:
-      imagePullSecrets:          #docker hub 관련 정보 추가
-      - name: dockerhub-secret #docker hub 관련 정보 추가
+#      imagePullSecrets:          #docker hub 관련 정보 추가
+#      - name: dockerhub-secret #docker hub 관련 정보 추가
       containers:
       - name: my-webserver
         image: masungil/echo-hostname:06cfa7d8b1298398b32d75664da60f20cfc91bad
