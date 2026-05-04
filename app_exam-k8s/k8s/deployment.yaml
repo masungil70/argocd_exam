@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: my-webserver
-        image: masungil/echo-hostname:dcca343ec38e88515f002a728154ed10401b6924
+        image: masungil/echo-hostname:457a5ca0d489404f5884019f4c2244db3bf58613
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
